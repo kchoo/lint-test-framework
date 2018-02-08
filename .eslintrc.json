@@ -13,9 +13,9 @@
 	"globals": {
 
 	},
-	"plugins": {
+	"plugins": [
 
-	},
+	],
 	"extends": [
 		"eslint:all"
 	],
@@ -26,9 +26,7 @@
 		}],
 		"no-await-in-loop": "error",
 		"no-compare-neg-zero": "error",
-		"no-cond-assign": ["error", {
-			"except-parens": true
-		}],
+		"no-cond-assign": ["error", "except-parens"],
 		"no-console": "warn",
 		"no-constant-condition": "error",
 		"no-control-regex": "error",
@@ -212,7 +210,7 @@
 		"array-element-newline": ["error", {
 			"multiline": true
 		}],
-		"block-spacing": ["error", "all"],
+		"block-spacing": ["error", "always"],
 		"brace-style": [
 			"error",
 			"1tbs",
@@ -238,7 +236,7 @@
 			"error",
 			"declaration",
 			{
-				"allowArrayFunctions": false
+				"allowArrowFunctions": false
 			}
 		],
 		"function-paren-newline": ["error", "multiline"],
@@ -270,7 +268,7 @@
 		"max-nested-callbacks": ["error", 1],
 		"max-params": ["error", 3],
 		"max-statements": "warn",
-		"max-statements-per-line": ["error", 1],
+		"max-statements-per-line": "error",
 		"multiline-comment-style": ["error", "bare-block"],
 		"multiline-ternary": ["error", "never"],
 		"new-cap": ["error", {
