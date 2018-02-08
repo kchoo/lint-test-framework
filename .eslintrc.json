@@ -94,7 +94,7 @@
 		"array-callback-return": "error",
 		"block-scoped-var": "error",
 		"class-methods-use-this": "error",
-		"complexity": ["error", 2],
+		"complexity": ["error", 3],
 		"consistent-return": "error",
 		"curly": ["error", "all"],
 		"default-case": "error",
@@ -187,7 +187,9 @@
 		"no-unused-vars": ["error", {
 
 		}],
-		"no-use-before-define": "error",
+		"no-use-before-define": ["error", {
+			"functions": false
+		}],
 
 		"callback-return": "error",
 		"global-require": "error",
@@ -199,7 +201,7 @@
 		"no-new-require": "error",
 		"no-path-concat": "error",
 		"no-process-env": "error",
-		"no-process-exit": "error",
+		"no-process-exit": "warn",
 		"no-restricted-modules": "error",
 		"no-sync": "error",
 
@@ -265,7 +267,7 @@
 		"max-depth": ["error", 3],
 		"max-len": ["error", 120],
 		"max-lines": "warn",
-		"max-nested-callbacks": ["error", 1],
+		"max-nested-callbacks": ["error", 2],
 		"max-params": ["error", 3],
 		"max-statements": "warn",
 		"max-statements-per-line": "error",
@@ -336,7 +338,7 @@
 				"allowTemplateLiterals": false
 			}
 		],
-		"require-jsdoc": ["error", {
+		"require-jsdoc": ["warn", {
 			"require": {
 				"FunctionDeclaration": true,
 				"MethodDefinition": true,
