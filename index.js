@@ -3,24 +3,24 @@ const {execSync, spawn} = require('child_process');
 const minimatch = require('minimatch');
 const readline = require('readline');
 
-function main () {
-	const watcher = watch('**/*.js', {ignored: ['node_modules', 'template.test.js']});
+function main() {
+	const watcher = watch('**/*.js', {ignored: ['node_modules']});
 
 	watcher.
-		on('ready', function watcherOnReady () {
+		on('ready', function watcherOnReady() {
 			// lint once we run this script, to avoid making a dummy change to start linting
 			watcher.emit('change');
 
 			watcher.
-				on('add', function watcherOnAdd (path) {
+				on('add', function watcherOnAdd(path) {
 					if (!/\.test\.js$/.test(path)) {
 						createNewTestFile(path);
 					}
 				});
 		}).
-		on('change', function watcherOnChange () {
-			/* clear the console, so that the only thing that is
-			   displayed is any errors from this round of linting (if any) */
+		on('change', function watcherOnChange() {
+			// clear the console, so that the only thing that is
+			// displayed is any errors from this round of linting (if any)
 			process.stdout.write('\x1B[2J\x1B[0f');
 
 			const allFilesWatched = getFilesWatched(watcher);
@@ -47,7 +47,7 @@ function main () {
 			input: process.stdin,
 			terminal: false
 		}).
-		on('line', function restartScript (line) {
+		on('line', function restartScript(line) {
 			if (line === '') {
 				spawn(
 					process.argv[0],
@@ -59,14 +59,16 @@ function main () {
 					}
 				);
 
+				/* eslint-disable no-process-exit */
 				process.exit();
+				/* eslint-enable no-process-exit */
 			}
 		});
 }
 
 main();
 
-function getFilesWatched (watcher) {
+function getFilesWatched(watcher) {
 	const filesArray = [];
 
 	const filesMap = watcher.getWatched();
@@ -82,13 +84,13 @@ function getFilesWatched (watcher) {
 	return filesArray;
 }
 
-function sh (command) {
+function sh(command) {
 	return execSync(
 		command,
 		{stdio: 'inherit'}
 	);
 }
 
-function createNewTestFile (path) {
+function createNewTestFile(path) {
 	sh(`cp template.test.js ${path.replace('.js', '.test.js')}`);
 }
