@@ -84,7 +84,7 @@
 			"requireReturn": true,
 			"requireReturnType": true,
 			"requireParamDescription": true,
-			"requireReturnDescription": true
+			"requireReturnDescription": false
 		}],
 		"valid-typeof": ["error", {
 			"requireStringLiterals": true
@@ -201,7 +201,7 @@
 		"no-new-require": "error",
 		"no-path-concat": "error",
 		"no-process-env": "error",
-		"no-process-exit": "warn",
+		"no-process-exit": "error",
 		"no-restricted-modules": "error",
 		"no-sync": "error",
 
@@ -271,7 +271,7 @@
 		"max-params": ["error", 3],
 		"max-statements": "warn",
 		"max-statements-per-line": "error",
-		"multiline-comment-style": ["error", "bare-block"],
+		"multiline-comment-style": ["error", "separate-lines"],
 		"multiline-ternary": ["error", "never"],
 		"new-cap": ["error", {
 			"newIsCap": true,
@@ -338,7 +338,7 @@
 				"allowTemplateLiterals": false
 			}
 		],
-		"require-jsdoc": ["warn", {
+		"require-jsdoc": ["error", {
 			"require": {
 				"FunctionDeclaration": true,
 				"MethodDefinition": true,
@@ -353,7 +353,10 @@
 		"sort-keys": "off",
 		"sort-vars": "off",
 		"space-before-blocks": ["error", "always"],
-		"space-before-function-paren": ["error", "always"],
+		"space-before-function-paren": ["error", {
+			"anonymous": "always",
+			"named": "never"
+		}],
 		"space-in-parens": ["error", "never"],
 		"space-infix-ops": "error",
 		"space-unary-ops": "error",
