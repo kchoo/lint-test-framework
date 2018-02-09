@@ -4,7 +4,7 @@ const _ = require('./_.js');
 
 module.exports = {
 	happy(test) {
-		const thing = Math.random()[-1];
+		const thing = Math.random();
 
 		test.strictEqual(thing, Math.random());
 
