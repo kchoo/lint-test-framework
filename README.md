@@ -16,3 +16,5 @@ will start up chokidar to watch all JS files in this directory. Whenever you sav
 If there are no linting errors, it looks for all `.test.js` files, and passes them to `nodeunit`, which will run the tests specified in that file. If you've never used `nodeunit` before, refer to `sample.js` and `sample.test.js` to see how a test file should look.
 
 In addition, if you create a new JS file, a `.test.js` file will be created next to it. For now it's just a copy of `template.test.js`, but I plan to have them update whenever you export something from your JS file
+
+Note: it's recommended to keep this process running in its own dedicated terminal. If you make changes to `eslintrc.json`, you can just hit `enter` to restart the whole process (which will read in the `eslintrc.json` changes
