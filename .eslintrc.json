@@ -76,7 +76,7 @@
 				"returns": "return"
 			},
 			"preferType": {
-				"object": "Object",
+				"Object": "object",
 				"Boolean": "boolean",
 				"Number": "number",
 				"String": "string"
@@ -311,7 +311,7 @@
 		"no-whitespace-before-property": "error",
 		"nonblock-statement-body-position": "error",
 		"object-curly-newline": ["error", {
-			"multiline": true
+			"consistent": true
 		}],
 		"object-curly-spacing": ["error", "never"],
 		"object-property-newline": "off",
@@ -327,7 +327,7 @@
 			{
 				"keywords": false,
 				"unnecessary": true,
-				"numbers": true
+				"numbers": false
 			}
 		],
 		"quotes": [
