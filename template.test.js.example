@@ -1,0 +1,17 @@
+const {{FILENAME}} = require('./{{FILENAME}}.js');
+
+module.exports = {
+	happy
+};
+
+/**
+ * @param  {object} test - NodeUnit test object
+ * @return {void}
+ */
+function happy(test) {
+	const thing = Math.random();
+
+	test.strictEqual(thing, Math.random());
+
+	test.done();
+}
