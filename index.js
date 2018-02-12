@@ -2,6 +2,7 @@ const {watch} = require('chokidar');
 const {execSync, spawn} = require('child_process');
 const minimatch = require('minimatch');
 const readline = require('readline');
+const path = require('path');
 
 function main() {
 	const watcher = watch('**/*.js', {ignored: ['node_modules']});
@@ -12,9 +13,9 @@ function main() {
 			watcher.emit('change');
 
 			watcher.
-				on('add', function watcherOnAdd(path) {
-					if (!/\.test\.js$/.test(path)) {
-						createNewTestFile(path);
+				on('add', function watcherOnAdd(filePath) {
+					if (!/\.test\.js$/.test(filePath)) {
+						createNewTestFile(filePath);
 					}
 				});
 		}).
@@ -25,7 +26,7 @@ function main() {
 
 			const allFilesWatched = getFilesWatched(watcher);
 
-			const lintCommand = `./node_modules/eslint/bin/eslint.js --fix ${allFilesWatched.join(' ')}`;
+			const lintCommand = `./node_modules/eslint/bin/eslint.js ${allFilesWatched.join(' ')}`;
 
 			// pass .test.js files to nodeunit
 			const testFiles = allFilesWatched.
@@ -91,6 +92,7 @@ function sh(command) {
 	);
 }
 
-function createNewTestFile(path) {
-	sh(`cp template.test.js ${path.replace('.js', '.test.js')}`);
+function createNewTestFile(filePath) {
+	const filename = path.basename(filePath, '.js');
+	sh(`cat template.test.js.example | sed s/{{FILENAME}}/${filename}/g > ${filePath.replace('.js', '.test.js')}`);
 }
