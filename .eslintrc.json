@@ -81,10 +81,11 @@
 				"Number": "number",
 				"String": "string"
 			},
-			"requireReturn": true,
+			"requireReturn": false,
 			"requireReturnType": true,
 			"requireParamDescription": true,
-			"requireReturnDescription": false
+			"requireReturnDescription": false,
+			"matchDescription": ".+"
 		}],
 		"valid-typeof": ["error", {
 			"requireStringLiterals": true
@@ -183,7 +184,7 @@
 		"no-shadow-restricted-names": "error",
 		"no-undef": "error",
 		"no-undef-init": "error",
-		"no-undefined": "error",
+		"no-undefined": "off",
 		"no-unused-vars": ["error", {
 
 		}],
