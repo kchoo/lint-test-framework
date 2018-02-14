@@ -1,9 +1,12 @@
 const {watch} = require('chokidar');
-const {execSync, spawn} = require('child_process');
+const {execSync} = require('child_process');
 const minimatch = require('minimatch');
-const readline = require('readline');
 const path = require('path');
 
+/**
+ * Kicks off the chokidar watcher, which will lint all .js files, and if the linting doesn't throw any errors,
+ * it will run nodeunit on all .test.js files
+ */
 function main() {
 	const watcher = watch('**/*.js', {ignored: ['node_modules']});
 
@@ -42,33 +45,17 @@ function main() {
 				// error is thrown when linting fails, we just want to continue
 			}
 		});
-
-	readline.
-		createInterface({
-			input: process.stdin,
-			terminal: false
-		}).
-		on('line', function restartScript(line) {
-			if (line === '') {
-				spawn(
-					process.argv[0],
-					process.argv.slice(1),
-					{
-						cwd: process.cwd(),
-						detached: false,
-						stdio: 'inherit'
-					}
-				);
-
-				/* eslint-disable no-process-exit */
-				process.exit();
-				/* eslint-enable no-process-exit */
-			}
-		});
 }
 
 main();
 
+/**
+ * chokidar's watcher's getWatched() will give us an object, where each key is a directory, and each value for that key
+ * is an array of files in that directory. This will flatten that structure into a nice array of full file paths
+ *
+ * @param  {object} watcher - chokidar watcher, passed into this just in case we want multiple watchers running
+ * @return {string[]}
+ */
 function getFilesWatched(watcher) {
 	const filesArray = [];
 
@@ -85,6 +72,12 @@ function getFilesWatched(watcher) {
 	return filesArray;
 }
 
+/**
+ * Run this command and return the output of it, synchronously
+ *
+ * @param  {string} command - command to run
+ * @return {string} stdout and/or stderr for executing this command
+ */
 function sh(command) {
 	return execSync(
 		command,
@@ -92,6 +85,11 @@ function sh(command) {
 	);
 }
 
+/**
+ * Create a .test.js file
+ *
+ * @param  {string} filePath - .js file that we should base the .test.js file off of
+ */
 function createNewTestFile(filePath) {
 	const filename = path.basename(filePath, '.js');
 	sh(`cat template.test.js.example | sed s/{{FILENAME}}/${filename}/g > ${filePath.replace('.js', '.test.js')}`);

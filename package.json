@@ -1,0 +1,13 @@
+{
+	"name": "kchoo-lint-test-framework",
+	"version": "0.0.1",
+	"description": "A base framework for providing linting and testing",
+	"main": "index.js",
+	"author": "kchoo",
+	"license": "GPL-3.0",
+	"dependencies": {
+		"chokidar": "^2.0.0",
+		"eslint": "^4.17.0",
+		"nodeunit": "^0.11.2"
+	}
+}
