@@ -62,6 +62,7 @@ function getFilesWatched(watcher) {
 	const filesMap = watcher.getWatched();
 
 	/* eslint-disable guard-for-in */
+	// these are just object literals, no need to check hasOwnProperty
 	for (const dir in filesMap) {
 		for (const file of filesMap[dir]) {
 			filesArray.push(`${dir}/${file}`);
